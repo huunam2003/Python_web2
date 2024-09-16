@@ -1,0 +1,45 @@
+.HomePage{
+    padding: 0 120px;
+    margin: 0 auto;
+}
+
+.TypeProduct{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: flex-start;
+    height: 44px;
+}
+.body{
+    background-color: #efefef;
+    padding: 0 120px;
+    height: 1200px;
+    width: 100%;
+}
+.Product_Homepage{
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+.See_more{
+    border: 1px solid #CC0000;
+    width: 240px;
+    height: 38px;
+    border-radius: 4px;
+    font-weight: 500;
+    &:hover{
+        color: #fff;
+        background-color: #CC0000;
+        span{
+            color: #fff;
+        }
+    }
+}
+.Wrap_See_more{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}

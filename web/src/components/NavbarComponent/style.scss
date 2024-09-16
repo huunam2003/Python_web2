@@ -1,0 +1,25 @@
+.LabelText{
+    color: rgb(56, 56, 61);
+    font-size: 14px;
+    font-weight: 500;
+}
+.TextValue{
+    color: rgb(56, 56, 61);
+    font-size: 12px;
+    font-weight: 400;
+}
+.Content{
+    display: flex;
+    flex-direction: column;
+    gap:12px;
+}
+.Rate{
+    display: flex;
+}
+.Price_Navbar{
+    padding: 4px;
+    border-radius: 10px;
+    background-color: rgb(238, 238, 238);
+    color: rgb(56, 56, 61);
+    width: fit-content;
+}

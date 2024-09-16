@@ -1,0 +1,36 @@
+.WrapperHeader {
+  padding: 10px 120px;
+  background-color: #CC0000;
+  align-items: center;
+  gap:16px;
+  flex-wrap: nowrap;
+}
+.TextHeader {
+  color: #ffffff;
+  font-size: 18px;
+  text-align: left;
+  font-weight: bold;
+  cursor: pointer;
+}
+.HeaderAccount{
+  display: flex;
+  align-items: center;
+  color: #fff;
+  gap: 10px;
+
+}
+.User_Icon{
+  font-size: 30px;
+  color: #fff;
+}
+
+.User_Text{
+  font-size: 12px;
+  color: #fff;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &:hover{
+    color: aqua;
+  }
+}

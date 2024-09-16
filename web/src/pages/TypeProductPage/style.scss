@@ -1,0 +1,25 @@
+.Container_TypeProduct{
+    width: 100%;
+    background-color: #efefef;
+}
+.Content_TypeProduct{
+    flex-wrap: nowrap;
+    padding-top: 10px;
+}
+.Navbar_TypeProduct{
+    background-color: #fff;
+    margin-right: 10px;
+    padding: 10px;
+    border-radius: 6px;
+    width: 200px;
+}
+.Product{
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+.Pagination-Next{
+    text-align: center;
+    margin-top: 10px;
+}

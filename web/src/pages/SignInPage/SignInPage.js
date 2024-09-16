@@ -1,0 +1,81 @@
+import { Image } from "antd";
+import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
+import { useState } from "react";
+import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
+import InputForm from "../../components/InputForm/InputForm";
+import "../SignInPage/style.scss";
+import imageLogin from "../../assets/images/login.webp";
+import { useNavigate } from "react-router-dom";
+
+function SignInPage() {
+  
+    const [isShowPassword, setIsShowPassword] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleOnChangeEmail = (value) => {
+      setEmail(value)
+    }
+
+    const handleOnChangePassword = (value) => {
+      setPassword(value)
+    }
+
+    const handleSignIn = () => {
+      console.log(email, password)
+    }
+
+    const navigate = useNavigate()
+    const handleNavigateSignUp = () => {
+      navigate('/sign-up')
+    }
+
+
+    return (
+      <div className="Wrap_login">
+          <div className="Login">
+              <div className="login_left">
+                  <Image src={imageLogin} preview={false} alt="image_login" />
+              </div>
+              <div className="login_right">
+                  <div className="login_title">Đăng nhập</div>
+
+                  <div className="login_form">
+                      <InputForm
+                        style={{ marginBottom: "10px" }}
+                        placeholder="Abc@gmail.com"
+                        value ={email}
+                        onChange={handleOnChangeEmail} 
+                    />
+
+                    <div style={{ position: "relative" }}>
+                        <span className="Hidden" onClick={() => setIsShowPassword(!isShowPassword)}>
+                          {isShowPassword ? <EyeFilled /> : <EyeInvisibleFilled />}
+                        </span>
+                        <InputForm
+                          placeholder="Password"
+                          type={isShowPassword ? "text" : "password"}
+                          value ={password}
+                          onChange={handleOnChangePassword}
+                        />
+
+
+                    </div>
+                      <ButtonComponent
+                        disabled={!email.length || !password.length}
+                        onClick={handleSignIn}
+                        className="Btn_Login"
+                        bordered="false"
+                        textButton={"Đăng nhập"}
+                      />
+                    {/* <div className="Text_login">Quên mật khẩu</div> */}
+                    <span>Bạn chưa có tài khoản? </span>
+                    <span className="Text_login" onClick={handleNavigateSignUp}>Tạo tài khoản</span>
+                  </div>
+            </div>
+        </div>
+      </div>
+  );
+}
+
+export default SignInPage;

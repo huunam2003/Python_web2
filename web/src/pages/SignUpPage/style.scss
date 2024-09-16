@@ -1,0 +1,55 @@
+.Btn_Login{
+    size: 40px;
+    background-color: rgb(255, 57, 69);
+    color: #fff;
+    height: 48px;
+    width: 100%;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 700;
+    margin: 30px 0 10px;
+}
+.Login{
+    width: 800px;
+    height: 445px;
+    border-radius: 10px;
+    background-color: #fff;
+    display: flex;
+}
+.Wrap_login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(0, 0, 0, 0.5);
+    height: 100vh;
+}
+.login_left{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+.login_right{
+    flex: 1;
+    padding: 40px 45px 25px;
+    display: flex;
+    flex-direction: column;
+}
+.Text_login{
+    color: rgb(13, 92, 182);
+    font-size: 13px;
+    cursor: pointer;
+}
+.login_title{
+    padding: 0 0 30px 0;
+    font-size: 25px;
+    text-align: center;
+}
+.Hidden{
+    z-index: 10;
+    position: absolute;
+    top: 4px;
+    right: 8px;
+}
