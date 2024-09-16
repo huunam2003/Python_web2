@@ -1,0 +1,12 @@
+your_app/
+├── app/
+│   ├── models.py
+│   ├── resources.py
+│   ├── auth.py
+│   └── ...
+├── app.py
+├── static
+│   ├── public/
+│   ├── source/
+│   └── ... 
+└── venv/
