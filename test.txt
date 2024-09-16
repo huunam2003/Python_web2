@@ -1,0 +1,9 @@
+Nhap het databse xong deploy len de lay link ve 
+
+
+name 
+sl 
+anh 
+gia 
+
+shiping 

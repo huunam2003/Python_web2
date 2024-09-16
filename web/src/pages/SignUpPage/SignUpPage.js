@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useState, useEffect } from 'react';
+
 import { Image } from "antd";
 import "../SignUpPage/style.scss";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
@@ -13,7 +14,43 @@ function SignUpPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-
+    const [users, setUsers] = useState([]); // State to store fetched users
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+    
+        const formData = { email, password };
+    
+        try {
+          const response = await fetch('http://localhost:5000/submit', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+          });
+    
+          const result = await response.json();
+          console.log('Server Response:', result);
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      };
+    
+      // Function to fetch all users from the database
+      const fetchUsers = async () => {
+        try {
+          const response = await fetch('http://localhost:5000'); // Assuming the "/" route returns all users
+          const data = await response.json();
+          setUsers(data); // Update state with fetched users
+        } catch (error) {
+          console.error('Error fetching users:', error);
+        }
+      };
+    
+      // Use useEffect to fetch users when the component mounts
+      useEffect(() => {
+        fetchUsers();
+      }, []);
     const handleOnChangeEmail = (value) => {
       setEmail(value)
     }
@@ -92,7 +129,7 @@ function SignUpPage() {
 
                         <ButtonComponent className='Btn_Login'    
                             disabled={!email.length || !password.length}
-                            onClick={handleSignUp}
+                            onClick={handleSubmit}
                             bordered ="false" 
                             textButton={'Đăng ký'}
                         />
