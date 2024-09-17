@@ -24,13 +24,19 @@ function SignInPage() {
           },
           body: JSON.stringify(formData),
         });
-  
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message);  // Throw an error to be caught in the catch block
+        }
         const result = await response.json();
         console.log('Server Response:', result);
+        alert("Sigin thanh cong ");
+
         handleNavigateHome()
       } catch (error) {
         // neu khong khop
-        console.error('Error:', error);
+        console.log('Server Response:', error);
+        alert("email hoac mat khau khong dung")
       }
     };
   

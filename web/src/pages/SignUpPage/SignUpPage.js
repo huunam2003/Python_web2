@@ -23,17 +23,20 @@ function SignUpPage() {
           if (password == confirmPassword){
             alert("Succesful")
           
-          const response = await fetch('http://localhost:5000/submit', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-          });
-    
-          const result = await response.json();
-          console.log('Server Response:', result);
-          handleNavigateSignIn()
+            const response = await fetch('http://localhost:5000/submit', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(formData),
+            });
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message);  // Throw an error to be caught in the catch block
+              }
+            const result = await response.json();
+            console.log('Server Response:', result);
+            handleNavigateSignIn()
           }
           else{alert("Mat khau khong khop")} /// xu li sau
         } catch (error) {
