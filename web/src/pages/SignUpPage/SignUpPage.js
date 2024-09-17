@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 
 import { Image } from "antd";
 import "../SignUpPage/style.scss";
@@ -7,6 +7,7 @@ import InputForm from "../../components/InputForm/InputForm";
 import imageLogin from '../../assets/images/login.webp';
 import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+//import { configConsumerProps } from 'antd/lib/config-provider';
 
 function SignUpPage() {
     const [isShowPassword ,setIsShowPassword] = useState(false);
@@ -14,44 +15,40 @@ function SignUpPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [setUsers] = useState([]); // State to store fetched users
+
     const handleSubmit = async (event) => {
         event.preventDefault();
-    
-        const formData = { email, password };
-    
+        const formData = { email, password , confirmPassword};
         try {
-          const response = await fetch('http://localhost:5000/submit', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-          });
-    
-          const result = await response.json();
-          console.log('Server Response:', result);
+            const response = await fetch('http://localhost:5000/submit', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(formData),
+            });
+            const result = await response.json();
+            if (!response.ok) {
+                throw new Error(result.message);  // Throw an error to be caught in the catch block
+              }
+            
+            
+            if (password === confirmPassword){
+              alert("Dang ky thanh cong")
+              handleNavigateSignIn()
+            }
+
+          else{
+            alert("Mat khau khong khop")
+          }
+
         } catch (error) {
-          console.error('Error:', error);
-        }
-      };  
-    
-      // Function to fetch all users from the database
-      const fetchUsers = async () => {
-        try {
-          const response = await fetch('http://localhost:5000'); // Assuming the "/" route returns all users
-          const data = await response.json();
-          setUsers(data); // Update state with fetched users
-        } catch (error) {
-          console.error('Error fetching users:', error);
+          // neu trung email
+          alert(error);
+          console.log(error)
         }
       };
-    
-      // Use useEffect to fetch users when the component mounts
-      useEffect(() => {
-        fetchUsers();
-      }, []);
-      
+
     const handleOnChangeEmail = (value) => {
       setEmail(value)
     }
