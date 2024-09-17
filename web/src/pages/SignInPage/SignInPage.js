@@ -1,6 +1,7 @@
 import { Image } from "antd";
 import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
-import { useState } from "react";
+import React, { useState, useEffect } from 'react';
+
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import InputForm from "../../components/InputForm/InputForm";
 import "../SignInPage/style.scss";
@@ -12,7 +13,27 @@ function SignInPage() {
     const [isShowPassword, setIsShowPassword] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      const formData = { email, password};
+      try {
+        const response = await fetch('http://localhost:5000/signin', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+  
+        const result = await response.json();
+        console.log('Server Response:', result);
+        handleNavigateHome()
+      } catch (error) {
+        // neu khong khop
+        console.error('Error:', error);
+      }
+    };
+  
     const handleOnChangeEmail = (value) => {
       setEmail(value)
     }
@@ -24,7 +45,9 @@ function SignInPage() {
     const handleSignIn = () => {
       console.log(email, password)
     }
-
+    const handleNavigateHome = () => {
+      navigate('/')
+    }
     const navigate = useNavigate()
     const handleNavigateSignUp = () => {
       navigate('/sign-up')
@@ -63,7 +86,7 @@ function SignInPage() {
                     </div>
                       <ButtonComponent
                         disabled={!email.length || !password.length}
-                        onClick={handleSignIn}
+                        onClick={handleSubmit}
                         className="Btn_Login"
                         bordered="false"
                         textButton={"Đăng nhập"}

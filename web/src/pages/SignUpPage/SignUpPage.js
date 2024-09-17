@@ -41,22 +41,6 @@ function SignUpPage() {
           console.error('Error:', error);
         }
       };
-    
-      // Function to fetch all users from the database
-      const fetchUsers = async () => {
-        try {
-          const response = await fetch('http://localhost:5000'); // Assuming the "/" route returns all users
-          const data = await response.json();
-          setUsers(data); // Update state with fetched users
-        } catch (error) {
-          console.error('Error fetching users:', error);
-        }
-      };
-    
-      // Use useEffect to fetch users when the component mounts
-      useEffect(() => {
-        fetchUsers();
-      }, []);
     const handleOnChangeEmail = (value) => {
       setEmail(value)
     }

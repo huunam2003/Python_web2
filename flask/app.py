@@ -35,12 +35,22 @@ def submit_form():
     existing_user = User.query.filter_by(email=email).first() # neu email ton tai 
     if existing_user:
         
-        return jsonify({"message": "Email already existed!"})
+        return jsonify({"message": "Email already existed!"}),404
     else:
         new_user = User(email=data['email'], password=data['password'])
         db.session.add(new_user)
         db.session.commit()
         return jsonify({"message": "User added successfully!"})
+    
+@app.route("/signin", methods=["POST"])
+def signin():
+    data = request.get_json()
+    email = data['email']
+    existing_user = User.query.filter_by(email=email).first()
+    if existing_user:
+        return jsonify({"message": "Sign in successfully!"})
+    else:
+        return jsonify({"message": "Email Not Found!"})
 
 if __name__ == "__main__":
     app.run(debug=True)
