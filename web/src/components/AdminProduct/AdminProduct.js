@@ -122,6 +122,21 @@ function AdminProduct() {
                 </Form.Item>
                 
                 <Form.Item
+                    label="Image"
+                    name="image"
+                    rules={[
+                        {
+                        required: true,
+                        message: 'Please input your image!',
+                        },
+                    ]}
+                >
+                    <div >
+                        <Button>Select file</Button>
+                    </div>
+                </Form.Item>
+
+                <Form.Item
                 wrapperCol={{
                     offset: 8,
                     span: 16,
