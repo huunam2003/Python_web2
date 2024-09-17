@@ -7,7 +7,7 @@ CORS(app)# core
 db = SQLAlchemy(app)
 
 class User(db.Model):
-    idid = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(100), nullable=False)
 
