@@ -15,6 +15,7 @@ function SignUpPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = { email, password , confirmPassword};
@@ -40,12 +41,14 @@ function SignUpPage() {
           else{
             alert("Mat khau khong khop")
           }
+
         } catch (error) {
           // neu trung email
           alert(error);
           console.log(error)
         }
       };
+
     const handleOnChangeEmail = (value) => {
       setEmail(value)
     }
