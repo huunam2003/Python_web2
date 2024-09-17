@@ -7,6 +7,7 @@ import InputForm from "../../components/InputForm/InputForm";
 import imageLogin from '../../assets/images/login.webp';
 import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { configConsumerProps } from 'antd/lib/config-provider';
 
 function SignUpPage() {
     const [isShowPassword ,setIsShowPassword] = useState(false);
@@ -17,10 +18,11 @@ function SignUpPage() {
     const [users, setUsers] = useState([]); // State to store fetched users
     const handleSubmit = async (event) => {
         event.preventDefault();
-    
-        const formData = { email, password };
-    
+        const formData = { email, password , confirmPassword};
         try {
+          if (password == confirmPassword){
+            alert("Succesful")
+          
           const response = await fetch('http://localhost:5000/submit', {
             method: 'POST',
             headers: {
@@ -31,7 +33,11 @@ function SignUpPage() {
     
           const result = await response.json();
           console.log('Server Response:', result);
+          handleNavigateSignIn()
+          }
+          else{alert("Mat khau khong khop")} /// xu li sau
         } catch (error) {
+          // neu trung email
           console.error('Error:', error);
         }
       };
