@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:mysqlpassword0411@localhost/test2'  # Change this for MySQL
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Nam07112003@localhost/test2'  # Change this for MySQL
 CORS(app)# core
 db = SQLAlchemy(app)
 
