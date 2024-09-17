@@ -9,13 +9,21 @@ import {
 }from '@ant-design/icons';
 function HeaderComponent() {
   const navigate = useNavigate() 
+  let output = "Đăng nhập/Đăng ký"
+  if(localStorage.getItem("status") == 1){
+    output = localStorage.getItem("email")
+  }
   const handleNavigateHome = () => {
     navigate('/')
   }
   const handleNavigateLogin = () => {
     navigate('/sign-in')
   }
-
+  const handleLogout = () =>{
+    
+    localStorage.setItem("status" , 0)
+    navigate("/")
+  }
   const handleNavigateCart = () => {
     navigate('/order')
   }
@@ -36,11 +44,13 @@ function HeaderComponent() {
           <div className="HeaderAccount">
             <UserOutlined className="User_Icon"/>
             <div >
-              <span className="User_Text" onClick={handleNavigateLogin}>Đăng nhập/Đăng ký</span>
+              <span className="User_Text" onClick={handleNavigateLogin}>{output}</span>
               {/* <div>
                 <span className="User_Text">Tài khoản</span>
                 <CaretDownOutlined />
               </div> */}
+              <span className="uu" onClick={handleLogout}>Dang xuat</span>
+
             </div>
           </div>
 
