@@ -14,7 +14,7 @@ function SignUpPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [users, setUsers] = useState([]); // State to store fetched users
+    const [setUsers] = useState([]); // State to store fetched users
     const handleSubmit = async (event) => {
         event.preventDefault();
     
@@ -34,7 +34,7 @@ function SignUpPage() {
         } catch (error) {
           console.error('Error:', error);
         }
-      };
+      };  
     
       // Function to fetch all users from the database
       const fetchUsers = async () => {
@@ -51,6 +51,7 @@ function SignUpPage() {
       useEffect(() => {
         fetchUsers();
       }, []);
+      
     const handleOnChangeEmail = (value) => {
       setEmail(value)
     }
@@ -61,10 +62,6 @@ function SignUpPage() {
 
     const handleOnChangeCofirmPassword = (value) => {
       setConfirmPassword(value)
-    }
-
-    const handleSignUp = () => {
-        console.log(email, password)
     }
 
     const navigate = useNavigate()
