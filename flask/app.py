@@ -31,11 +31,16 @@ def get_users():
 @app.route("/submit", methods=["POST"])
 def submit_form():
     data = request.get_json()
-    print("ok")
-    new_user = User(email=data['email'], password=data['password'])
-    db.session.add(new_user)
-    db.session.commit()
-    return jsonify({"message": "User added successfully!"})
+    email = data['email']
+    existing_user = User.query.filter_by(email=email).first() # neu email ton tai 
+    if existing_user:
+        
+        return jsonify({"message": "Email already existed!"})
+    else:
+        new_user = User(email=data['email'], password=data['password'])
+        db.session.add(new_user)
+        db.session.commit()
+        return jsonify({"message": "User added successfully!"})
 
 if __name__ == "__main__":
     app.run(debug=True)

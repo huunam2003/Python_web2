@@ -40,6 +40,11 @@ class User(db.Model):
 def index():
     if request.method == 'POST':
         task_email = request.form['email']
+        existing_user = User.query.filter_by(email=task_email).first()
+
+        if existing_user:
+            return redirect('/')
+
         task_password = request.form['password']
         new_task = User(password = task_password, email = task_email)
 
