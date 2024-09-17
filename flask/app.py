@@ -76,11 +76,9 @@ def signin():
     existing_user = User.query.filter_by(email=email, password = password).first()
 
     if existing_user:
-        # print(existing_user.email)
-        #return jsonify(existing_user.email)
-        return jsonify({"message":"dang nhap thanh cong!", "email" : existing_user.email})
+        return jsonify({"message":"dang nhap thanh cong!", "email" : existing_user.email , 'status' : 1})
     else:
-        return jsonify({"message": "Mat khau hoac email khong dung"}),404
+        return jsonify({"message": "Mat khau hoac email khong dung" ,'status' : 0}),404
 
 @app.route("/admin", methods = ["POST" , "GET"])
 def admin():

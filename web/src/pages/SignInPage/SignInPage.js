@@ -9,7 +9,7 @@ import imageLogin from "../../assets/images/login.webp";
 import { useNavigate } from "react-router-dom";
 
 function SignInPage() {
-  
+    let status = 0
     const [isShowPassword, setIsShowPassword] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -26,9 +26,11 @@ function SignInPage() {
         });
         const result = await response.json();
         localStorage.setItem('email', result.email); /// lay email
+        status = result.status
         if (!response.ok) {
           throw new Error(result.message);  // Khong dung
         }
+        
         alert(result.message);
         handleNavigateHome()
        
@@ -38,6 +40,7 @@ function SignInPage() {
         console.log(error)
 
       }
+      localStorage.setItem("status" , status)
     };
   
     const handleOnChangeEmail = (value) => {

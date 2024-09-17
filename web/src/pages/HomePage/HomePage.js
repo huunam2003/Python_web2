@@ -9,7 +9,7 @@ import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 
 function HomePage() {
   const arr = ['TV', 'Tu lanh', 'Lap top']
-  const result = localStorage.getItem('result'); // lay email tu sign in 
+  
 
   return( 
   <>
