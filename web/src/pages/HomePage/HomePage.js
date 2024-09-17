@@ -9,6 +9,8 @@ import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 
 function HomePage() {
   const arr = ['TV', 'Tu lanh', 'Lap top']
+  const result = localStorage.getItem('result'); // lay email tu sign in 
+
   return( 
   <>
     <div className="HomePage">
@@ -20,6 +22,7 @@ function HomePage() {
         })}
       </div>
     </div>
+
     <div className="body">
       <SliderComponent arrImages={[slider1, slider2]}/>
       <div className="Product_Homepage" >

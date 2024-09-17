@@ -17,7 +17,28 @@ function AdminProduct() {
         countInStock: '',
         image: '',
     })
-
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+          const response = await fetch('http://localhost:5000/admin', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(stateProduct),
+          });
+          const result = await response.json();
+          if (!response.ok) {
+            throw new Error(result.message);  // Khong dung
+          }
+          alert(result.message);
+        } catch (error) {
+          // neu khong khop
+          alert(error)
+          console.log(error)
+  
+        }
+      };
     const handleCancel = () => {
         setIsModalOpen(false);
     };
@@ -127,7 +148,7 @@ function AdminProduct() {
                     span: 16,
                 }}
                 >
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" htmlType="submit" onClick={handleSubmit}>
                     Submit
                 </Button>
                 </Form.Item>

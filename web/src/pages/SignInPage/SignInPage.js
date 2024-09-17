@@ -25,6 +25,7 @@ function SignInPage() {
           body: JSON.stringify(formData),
         });
         const result = await response.json();
+        localStorage.setItem('email', result.email); /// lay email
         if (!response.ok) {
           throw new Error(result.message);  // Khong dung
         }
