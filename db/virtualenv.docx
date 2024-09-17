@@ -1,0 +1,18 @@
+-- pip install virtual env 
+-- virtualenv <name = env> tạo ra folder env trên path hiện tại 
+-- name\Scripts\activate # đăng nhập vào môi trường ảo (env) C:\
+mọi cài đặt sẽ được lưu vào môi trường ảo
+-- deactivate thoát môi trường ảo
+
+-- python app.py # chạy và pop up 1 đường dẫn 
+-- render_template('/index.html') # tên folder là templates sẽ tự động dc tìm thấy 
+ko cần ./templates 
+
+
+++ RuntimeError: Working outside of application context. : 
+    db = SQLAlchemy(app)
+    * app.app_context().push()
+thoát python = CTRL + Z xong chạy lại 
+
+++ trong mysql:
+database dc luu o 'C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Data\\'

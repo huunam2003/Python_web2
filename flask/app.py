@@ -7,10 +7,10 @@ CORS(app)# core
 db = SQLAlchemy(app)
 
 class User(db.Model):
-    idid = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(100), nullable=False)
-
+    
     def to_dict(self):
         return {
             "email": self.email,
@@ -31,11 +31,28 @@ def get_users():
 @app.route("/submit", methods=["POST"])
 def submit_form():
     data = request.get_json()
-    print("ok")
-    new_user = User(email=data['email'], password=data['password'])
-    db.session.add(new_user)
-    db.session.commit()
-    return jsonify({"message": "User added successfully!"})
+    email = data['email']
+    existing_user = User.query.filter_by(email=email).first() # neu email ton tai 
+    if existing_user:
+        
+        return jsonify({"message": "Email bi trung !"}),404
+    else:
+        new_user = User(email=data['email'], password=data['password'])
+        db.session.add(new_user)
+        db.session.commit()
+        return jsonify("ADD User thanh cong!")
+    
+@app.route("/signin", methods=["POST"])
+def signin():
+    data = request.get_json()
+    email = data['email']
+    password = data['password']
+    existing_user = User.query.filter_by(email=email, password = password).first()
+    print(existing_user)
+    if existing_user:
+        return jsonify({"message":"dang nhap thanh cong!"})
+    else:
+        return jsonify({"message": "Mat khau hoac email khong dung"}),404
 
 if __name__ == "__main__":
     app.run(debug=True)
