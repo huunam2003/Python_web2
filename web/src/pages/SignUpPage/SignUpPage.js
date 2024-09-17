@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 
 import { Image } from "antd";
 import "../SignUpPage/style.scss";
@@ -7,7 +7,7 @@ import InputForm from "../../components/InputForm/InputForm";
 import imageLogin from '../../assets/images/login.webp';
 import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import { configConsumerProps } from 'antd/lib/config-provider';
+//import { configConsumerProps } from 'antd/lib/config-provider';
 
 function SignUpPage() {
     const [isShowPassword ,setIsShowPassword] = useState(false);
@@ -15,14 +15,10 @@ function SignUpPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [users, setUsers] = useState([]); // State to store fetched users
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = { email, password , confirmPassword};
         try {
-          if (password == confirmPassword){
-            alert("Succesful")
-          
             const response = await fetch('http://localhost:5000/submit', {
               method: 'POST',
               headers: {
@@ -30,18 +26,24 @@ function SignUpPage() {
               },
               body: JSON.stringify(formData),
             });
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message);  // Throw an error to be caught in the catch block
-              }
             const result = await response.json();
-            console.log('Server Response:', result);
-            handleNavigateSignIn()
+            if (!response.ok) {
+                throw new Error(result.message);  // Throw an error to be caught in the catch block
+              }
+            
+            
+            if (password === confirmPassword){
+              alert("Dang ky thanh cong")
+              handleNavigateSignIn()
+            }
+
+          else{
+            alert("Mat khau khong khop")
           }
-          else{alert("Mat khau khong khop")} /// xu li sau
         } catch (error) {
           // neu trung email
-          console.error('Error:', error);
+          alert(error);
+          console.log(error)
         }
       };
     const handleOnChangeEmail = (value) => {
@@ -54,10 +56,6 @@ function SignUpPage() {
 
     const handleOnChangeCofirmPassword = (value) => {
       setConfirmPassword(value)
-    }
-
-    const handleSignUp = () => {
-        console.log(email, password)
     }
 
     const navigate = useNavigate()
