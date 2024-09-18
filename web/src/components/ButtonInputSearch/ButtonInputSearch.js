@@ -4,7 +4,7 @@ import InputComponent from "../InputComponent/InputComponent";
 import ButtonComponent from "../ButtonComponent/ButtonComponent";
 
 function ButtonInputSearch(props) {
-    const {size, placeholder, textButton} = props
+    const {size, placeholder, textButton, ...rest} = props
     return ( 
         <div className="Search">
             <InputComponent 
@@ -12,6 +12,7 @@ function ButtonInputSearch(props) {
                 placeholder={placeholder} 
                 bordered ="false" 
                 className='Input'
+                {...rest}     
             />
             <ButtonComponent 
                 size= {size} 

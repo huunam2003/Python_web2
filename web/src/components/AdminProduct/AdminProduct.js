@@ -16,14 +16,9 @@ function AdminProduct() {
     countInStock: "",
     image: "",
   });
-  const formData = {
-    name: stateProduct.name,
-    price: stateProduct.price,
-    description: stateProduct.description,
-    type: stateProduct.type,
-    countInStock: stateProduct.countInStock,
-    image: stateProduct.image,  // Send the Base64 encoded image
-};
+
+  const [form] =Form.useForm();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -32,7 +27,7 @@ function AdminProduct() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(stateProduct),
       });
       const result = await response.json();
       if (!response.ok) {
@@ -47,6 +42,15 @@ function AdminProduct() {
   };
   const handleCancel = () => {
     setIsModalOpen(false);
+    setStateProduct({
+      name: "",
+      price: "",
+      description: "",
+      type: "",
+      countInStock: "",
+      image: "",
+    });
+    form.resetFields()
   };
  
   const onFinish = () => {
@@ -59,7 +63,9 @@ function AdminProduct() {
       [e.target.name]: e.target.value,
     });
   };
- 
+  
+  const [fileList, setFileList] = useState([]);
+
   const handleOnchangeImage = async ({ fileList }) => {
     const file = fileList[0];
     if (!file.url && !file.preview) {
@@ -69,6 +75,7 @@ function AdminProduct() {
       ...stateProduct,
       image: file.preview,
     });
+    setFileList([file]);
   };
  
   return (
@@ -82,7 +89,7 @@ function AdminProduct() {
         title="Tạo sản phẩm"
         open={isModalOpen}
         onCancel={handleCancel}
-        okText=""
+        footer={null}
       >
         <Form
           name="basic"
@@ -100,6 +107,7 @@ function AdminProduct() {
           }}
           onFinish={onFinish}
           autoComplete="off"
+          form={form}
         >
           <Form.Item
             label="Name"
@@ -199,6 +207,7 @@ function AdminProduct() {
             <Upload
               className="Upload_Image"
               onChange={handleOnchangeImage}
+              fileList={fileList}
               maxCount={1}
             >
               <div>
@@ -211,10 +220,9 @@ function AdminProduct() {
                   style={{ width: "150px" }}
                 />
               </div>
-              
             </Upload>
           </Form.Item>
-
+ 
           <Form.Item
             wrapperCol={{
               offset: 8,

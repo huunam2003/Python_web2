@@ -7,43 +7,29 @@ function TableComponent(props) {
         {
           title: 'Name',
           dataIndex: 'name',
-          render: (text) => <a href={`#${text}`}>{text}</a>,
         },
         {
-          title: 'Age',
-          dataIndex: 'age',
+          title: 'Type',
+          dataIndex: 'type',
         },
         {
-          title: 'Address',
-          dataIndex: 'address',
+          title: 'Count InStock',
+          dataIndex: 'countInStock',
+        },
+        {
+          title: 'Price',
+          dataIndex: 'price',
+        },
+        {
+          title: 'Description',
+          dataIndex: 'description',
+        },
+        {
+          title: 'Action',
+          dataIndex: 'action',
         },
       ];
-      const data = [
-        {
-          key: '1',
-          name: 'John Brown',
-          age: 32,
-          address: 'New York No. 1 Lake Park',
-        },
-        {
-          key: '2',
-          name: 'Jim Green',
-          age: 42,
-          address: 'London No. 1 Lake Park',
-        },
-        {
-          key: '3',
-          name: 'Joe Black',
-          age: 32,
-          address: 'Sydney No. 1 Lake Park',
-        },
-        {
-          key: '4',
-          name: 'Disabled User',
-          age: 99,
-          address: 'Sydney No. 1 Lake Park',
-        },
-      ];
+      const data = [];
       
       // rowSelection object indicates the need for row selection
       const rowSelection = {

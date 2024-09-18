@@ -1,46 +1,34 @@
 import { Col, Image, InputNumber, Row } from "antd";
 import imageProduct from '../../assets/images/image1.webp';
-import imageProductSmall from '../../assets/images/imagesmall.webp';
 import "../ProductDetailComponent/style.scss";
-import { StarFilled, PlusOutlined, MinusOutlined } from "@ant-design/icons";
+import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
 import ButtonComponent from "../ButtonComponent/ButtonComponent";
+import { useState } from "react";
 
 function ProductDetailComponent() {
-    const onChange=() => {};
+    const [numProduct, setNumProduct] = useState(1);
+    const onChange=(value) => {
+        setNumProduct(Number(value))
+    };
+
+    const handleChangeCount = (type) => {
+        if (type === 'increase') {
+            setNumProduct(numProduct + 1);
+        } else if (type === 'decrease' && numProduct > 1) {
+            setNumProduct(numProduct - 1);
+        }
+    }
+
+    const handleAddOrderProduct= () => {
+    }
     return ( 
         <Row style={{padding:'16px', background:'#fff', borderRadius: '4px'}}>
             <Col style={{borderRight: '1px solid #e5e5e5', paddingRight: '8px'}} span={10}>
                 <Image className="ImageLarge" src = {imageProduct} alt= "image product" preview = {false}/>
-                <Row style={{paddingTop:'10px', justifyContent:'space-between'}}>
-                    <Col className="Wrap_ImageSmall" span={4}>
-                        <Image className="ImageSmall" src = {imageProductSmall} alt= "image product" preview = {false}/>
-                    </Col>
-                    <Col className="Wrap_ImageSmall" span={4}>
-                        <Image className="ImageSmall" src = {imageProductSmall} alt= "image product" preview = {false}/>
-                    </Col>
-                    <Col className="Wrap_ImageSmall" span={4}>
-                        <Image className="ImageSmall" src = {imageProductSmall} alt= "image product" preview = {false}/>
-                    </Col>
-                    <Col className="Wrap_ImageSmall" span={4}>
-                        <Image className="ImageSmall" src = {imageProductSmall} alt= "image product" preview = {false}/>
-                    </Col>
-                    <Col className="Wrap_ImageSmall" span={4}>
-                        <Image className="ImageSmall" src = {imageProductSmall} alt= "image product" preview = {false}/>
-                    </Col>
-                    <Col className="Wrap_ImageSmall" span={4}>
-                        <Image className="ImageSmall" src = {imageProductSmall} alt= "image product" preview = {false}/>
-                    </Col>
-                </Row>
             </Col>
             <Col style={{padding:'10px'}} span={14}>
                 <div className="Name_ProducDetail">
                     Apple iPhone 15 Pro Max
-                </div>
-                <div style={{padding:'15px 0 10px 0'}}>
-                    <StarFilled style={{ fontSize: "12px", color: "yellow" }}/>
-                    <StarFilled style={{ fontSize: "12px", color: "yellow" }}/>
-                    <StarFilled style={{ fontSize: "12px", color: "yellow" }}/>
-                    <span> | Đã bán 1000+</span>
                 </div>
                 <div className="Wrap_Price_ProductDetail">
                     <div className="Price_ProductDetail">20.000.000đ</div>
@@ -54,13 +42,13 @@ function ProductDetailComponent() {
                     <div>Số lượng</div>
                     <div className="QualityProduct">
                         <button className="Btn_QualityProduct">                        
-                            <MinusOutlined style={{color:'#000', fontSize:'15px'}}/>
+                            <MinusOutlined style={{color:'#000', fontSize:'15px'}} onClick={() => handleChangeCount('decrease')}/>
                         </button>
 
-                        <InputNumber className="Input_ProductDetail" defaultValue={3} onChange={onChange} size="small" />
+                        <InputNumber className="Input_ProductDetail" defaultValue={1} onChange={onChange} value={numProduct} size="small" />
 
                         <button className="Btn_QualityProduct">
-                            <PlusOutlined style={{color:'#000', fontSize:'15px'}}/>
+                            <PlusOutlined style={{color:'#000', fontSize:'15px'}} onClick={() => handleChangeCount('increase')}/>
                         </button>
                     </div>
                 </div>
@@ -68,6 +56,7 @@ function ProductDetailComponent() {
                     <ButtonComponent className='Btn_Buy'    
                         bordered ="false" 
                         textButton={'Thêm vào giỏ hàng'}
+                        onClick={handleAddOrderProduct}
                     />
                 </div>
             </Col>

@@ -24,7 +24,7 @@ export const routes = [
     isShowHeader: true,
   },
   {
-    path: "/type",
+    path: "/product/:type",
     component: TypeProductPage,
     isShowHeader: true,
   },

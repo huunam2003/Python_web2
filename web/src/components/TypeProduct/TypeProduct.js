@@ -1,5 +1,12 @@
+import { useNavigate } from "react-router-dom";
+
 function TypeProduct({name}) {
-    return ( <div style={{padding: '10px'}}>{name}</div> );
+    const navigate = useNavigate()
+    const handleNavigatetype = (type) => {
+        navigate(`/product/${type}`)
+    } 
+
+    return ( <div style={{padding: '10px', cursor:'pointer'}} onClick={() =>handleNavigatetype(name)} >{name}</div> );
 }
 
 export default TypeProduct;
