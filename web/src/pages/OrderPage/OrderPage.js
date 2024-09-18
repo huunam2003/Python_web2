@@ -9,33 +9,7 @@ import {
 function OrderPage({count = 1}) {
   const onChange = (e) => {};
   return (
-  // <div className="Container_OrderPage">
-  //   <div style={{width: '1400px', margin: '0 auto'}}>
-  //       <h3>Giỏ hàng</h3>
-  //       <Row className="Content_OrderPage">
-  //           <Col span={20}>
-  //               <span style={{display:'inline-block', width: '390px'}}>
-  //                 <span> Tất cả ({count} sản phẩm)</span>
-  //               </span>
-  //               <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
-  //                 <span>Đơn giá</span>
-  //                 <span>Số lượng</span>
-  //                 <span>Thành tiền</span>
-  //                 <DeleteOutlined />
-  //               </div>
-  //           </Col>
-  //           <Col span={4} className="Payment">
-  //               <NavbarComponent/>
-  //               <ButtonComponent className='Btn_Buy'    
-  //                       bordered ="false" 
-  //                       textButton={'Mua hàng'}
-  //                   />
-  //           </Col>
-  //       </Row>
-  //   </div>
-  // </div>
-  <div className="cart_container">
-      <h3>Giỏ hàng</h3>
+   <div className="cart_container">
       <div className="cart_table">
         <div className="cart_header">
           <span style={{flex:2}}> Tất cả ({count} sản phẩm)</span>

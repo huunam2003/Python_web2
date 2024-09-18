@@ -3,3 +3,8 @@
     width: 100px;
     border-radius: 5px;
 }
+.Upload_Image{
+    & .ant-upload-list-item-info{
+        display: none;
+    }
+}

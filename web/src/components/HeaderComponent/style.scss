@@ -34,3 +34,9 @@
     color: aqua;
   }
 }
+.Logout{
+  cursor: pointer;
+  &:hover{
+    background-color: #ccc;
+  }
+}
