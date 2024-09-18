@@ -8,6 +8,7 @@ function App() {
       <Router>
         <Routes>
           {routes.map((route, index) => {
+            
             const Page = route.component;
             const Layout = route.isShowHeader ? DefaultComponent : Fragment;
             return (

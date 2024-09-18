@@ -1,6 +1,9 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request,Response,send_file
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+import base64
+import io
+import re
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:mysqlpassword0411@localhost/test2'  # Change this for MySQL
   # Change this for MySQL
@@ -26,16 +29,15 @@ class Product(db.Model):
     countinstock = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Double, nullable=False)
     description = db.Column(db.String(100), nullable = False)
-    #image = db.Column(db.String(100), nullable = False)
+    image = db.Column(db.LargeBinary) 
     def to_dict(self):
             return {
-                "id": self.id,
-                "name": self.name,
-                "type": self.type,
-                "countinstock": self.countinstock,
-                "price": self.price
-                #"password": self.password,
-
+                # "id": self.id,
+                "name": self.name
+                # "type": self.type,
+                # "countinstock": self.countinstock,
+                # "price": self.price,
+                # "image" : base64.b64encode(self.image).decode('utf-8')[:50] if self.image else None
             }
 
 # Initialize DB (for testing, remove in production)
@@ -43,15 +45,15 @@ with app.app_context():
     db.create_all()
 
 # Route to get all users
-@app.route("/user", methods=["GET"])
-def get_users():
-    users = User.query.all()
-    return jsonify([user.to_dict() for user in users])
+# @app.route("/user", methods=["GET"])
+# def get_users():
+#     users = User.query.all()
+#     return jsonify([user.to_dict() for user in users])
 
-@app.route("/admin", methods=["GET"])
-def get_products():
-    products = Product.query.all()
-    return jsonify([product.to_dict() for product in products])
+# @app.route("/admin", methods=["GET"])
+# def get_products():
+#     products = Product.query.all()
+#     return jsonify([product.to_dict() for product in products])
 
 # Route to submit form data
 @app.route("/submit", methods=["POST"])
@@ -80,29 +82,86 @@ def signin():
     else:
         return jsonify({"message": "Mat khau hoac email khong dung" ,'status' : 0}),404
 
+
+@app.route('/admin/<filename>', methods = ['GET'])
+def getImage(filename):
+    product = Product.query.filter_by(name = filename).first()
+    if product and product.image:
+        # Base64 encode the binary image data
+        encoded_image = base64.b64encode(product.image).decode('utf-8')
+        # Prefix the data with 'data:image/png;base64,' so it can be rendered in React
+        img = f"data:image/png;base64,{encoded_image}"
+        print(img[:30])
+    else:
+        img = None
+
+    return jsonify({"image" : img})
+
+
 @app.route("/admin", methods = ["POST" , "GET"])
 def admin():
-    data= request.get_json()
-    # try:
-    #     image = request.files['image']  # Get image file from the form
-    #     image = image.filename
+    if request.method == 'GET':
+        products = Product.query.all()
+        return jsonify([product.to_dict() for product in products])
+    data = request.get_json()
+    image_base64 = data['image']
+    print(image_base64[:30])
+    image_base64 = re.sub(r'^data:image/[a-zA-Z]+;base64,', '', image_base64)
+    # # Fix Base64 padding if necessary
+    # missing_padding = -len(image_base64) % 4
+    # if missing_padding:
+    #     image_base64 += '=' * (4 - missing_padding)
+    
+    # # Decode the Base64 image string to binary
+    image_binary = base64.b64decode(image_base64)
+    try:
+        new_product = Product(
+            name=data['name'],
+            price=float(data['price']),
+            description=data['description'],
+            type=data['type'],
+            countinstock=int(data['countInStock']),
+            image=image_binary  # Store Base64 image string
+        )
+        db.session.add(new_product)
+        db.session.commit()
+        return jsonify({"message" : "Product added successfully"}), 201  # Success response
+    except Exception as e:
+        print(e)
+        return jsonify({"message":"Failed to add product"}), 500  # Error response
 
-        
-    new_admin = Product(name=data['name'], 
-                        type=data['type'],
-                        countinstock=int(data['countInStock']),
-                        price=int(data['price']),
-                        description=data['description'],
-                        #image = "NULL"
-                        )
-
-    db.session.add(new_admin)
-    db.session.commit()
-    # except Exception as e:
-    #     print(e)
-    #     return jsonify("failed")
-    return jsonify("ok")
 
 
+@app.route('/filter', methods = ["GET", "POST"])
+def filter():
+    products  = Product.query.all()
+    return jsonify([product.to_dict() for product in products])
+
+#///////////////////////////////////////////////////////
+# @app.route('/upload', methods=['POST'])
+# def upload_image():
+#     data = request.json
+#     image_base64 = data['image'].split(',')[1]  # Remove the prefix data:image/png;base64,
+#     image_data = base64.b64decode(image_base64)
+#     name = data.get('name', 'untitled')
+
+#     new_product = Product(name=name, image=image_data)
+#     db.session.add(new_product)
+#     db.session.commit()
+
+#     return jsonify({'message': 'Image uploaded successfully'}), 201
+
+# @app.route('/admin2/<filename>', methods=['GET'])
+# def get_image(filename):
+#     product = Product.query.filter_by(name=filename).first()
+#     if not product:
+#         return jsonify({'message': 'Image not found'}), 404
+
+#     return send_file(
+#         io.BytesIO(product.image),
+#         mimetype='image/png',
+#         as_attachment=False,
+#         download_name=filename
+#     )
 if __name__ == "__main__":
     app.run(debug=True)
