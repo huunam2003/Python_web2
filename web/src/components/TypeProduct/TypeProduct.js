@@ -6,7 +6,9 @@ function TypeProduct({name}) {
         navigate(`/product/${type}`)
     } 
 
-    return ( <div style={{padding: '10px', cursor:'pointer'}} onClick={() =>handleNavigatetype(name)} >{name}</div> );
+    return ( 
+        <div style={{padding: '10px', cursor:'pointer'}} onClick={() =>handleNavigatetype(name)}>{name}</div> 
+);
 }
 
 export default TypeProduct;

@@ -1,5 +1,4 @@
 import HomePage from "../pages/HomePage/HomePage";
-import ProductPage from "../pages/ProductPage/ProductPage";
 import OrderPage from "../pages/OrderPage/OrderPage";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import TypeProductPage from "../pages/TypeProductPage/TypeProductPage";
@@ -11,11 +10,6 @@ export const routes = [
   {
     path: "/",
     component: HomePage,
-    isShowHeader: true,
-  },
-  {
-    path: "/products",
-    component: ProductPage,
     isShowHeader: true,
   },
   {
@@ -39,7 +33,7 @@ export const routes = [
     isShowHeader: false,
   },
   {
-    path: "/product-detail",
+    path: "/product-detail/:id",
     component: ProductDetailPage,
     isShowHeader: true,
   },

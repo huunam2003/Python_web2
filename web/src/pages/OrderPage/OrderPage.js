@@ -6,8 +6,22 @@ import {
   MinusOutlined,
   PlusOutlined
 }from '@ant-design/icons';
+import { useState } from "react";
 function OrderPage({count = 1}) {
-  const onChange = (e) => {};
+
+  const [numProduct, setNumProduct] = useState(1);
+    const onChange=(value) => {
+        setNumProduct(Number(value))
+    };
+
+  const handleChangeCount = (type) => {
+    if (type === 'increase') {
+        setNumProduct(numProduct + 1);
+    } else if (type === 'decrease' && numProduct > 1) {
+        setNumProduct(numProduct - 1);
+    }
+}
+
   return (
    <div className="cart_container">
       <div className="cart_table">
@@ -27,13 +41,13 @@ function OrderPage({count = 1}) {
             <span>10.000.000</span>  
           </div>
           <div className="cart_item_quantity">
-            <button className="Btn_QualityProduct_OrderPage">                        
+            <button className="Btn_QualityProduct_OrderPage" onClick={() => handleChangeCount('decrease')}>                        
               <MinusOutlined style={{color:'#000', fontSize:'10px'}}/>
             </button> 
             
-            <InputNumber className="Input_OrderPage" defaultValue={3} onChange={onChange} size="small" />
+            <InputNumber className="Input_OrderPage" defaultValue={3} onChange={onChange} value={numProduct} size="small" />
 
-            <button className="Btn_QualityProduct_OrderPage">
+            <button className="Btn_QualityProduct_OrderPage" onClick={() => handleChangeCount('increase')}>
               <PlusOutlined style={{color:'#000', fontSize:'10px'}}/>
             </button>
                     

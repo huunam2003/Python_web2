@@ -37,7 +37,7 @@ function HeaderComponent() {
     <div>
       <Row className="WrapperHeader">
         <Col className="TextHeader" span={5} onClick={handleNavigateHome}>
-          Dell
+          LAPTOP
         </Col>
         <Col span={13}>
           <ButtonInputSearch

@@ -1,10 +1,11 @@
 import { Card } from "antd";
 import "../CardComponent/style.scss";
 import { useNavigate } from "react-router-dom";
-function CardComponent() {
+function CardComponent(props) {
+  const {name, price, image, id}=props;
   const navigate = useNavigate()
-  const handleProductDetails = () => {
-    navigate('/product-detail')
+  const handleProductDetails = (id) => {
+    navigate(`/product-detail/${id}`)
   }
 
   return (
@@ -15,15 +16,13 @@ function CardComponent() {
       cover={
         <img
           alt="example"
-          src="https://tse1.mm.bing.net/th?id=OIP.TJVtXbiOokT81I5N7FJ-cwHaEK&pid=Api"
+          src={image}
         />
       }
-      onClick={handleProductDetails}
+      onClick={() => handleProductDetails(id)}
     >
-      <div className="NameProduct">Iphone</div>
-      <div className="Price_card">
-        1.000.000đ
-      </div>
+      <div className="NameProduct">{name}</div>
+      <div className="Price_card">{price.toLocaleString()}</div>
     </Card>
   );
 }

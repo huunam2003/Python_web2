@@ -3,7 +3,7 @@
 }
 .Name_ProducDetail{
     color: rgb(36, 36, 36);
-    font-size: 24px;
+    font-size: 32px;
     font-weight: 300;
     line-height: 32px;
     overflow-wrap: break-word;
@@ -13,12 +13,19 @@
     border-radius: 4px;
 }
 .Price_ProductDetail{
-    font-size: 32px;
+    font-size: 28px;
     line-height: 40px;
     margin-right: 8px;
     font-weight: 500;
-    padding: 10px 0 20px 0;
+    padding: 10px 0 10px 0;
     color: red;
+}
+.Wrap_Description_ProductDetail{
+    font-size: 16px;
+    padding: 0 0 20px 0;
+}
+.Description_ProductDetail{
+    font-weight: 500;
 }
 .AddressProduct{
     span.address{
