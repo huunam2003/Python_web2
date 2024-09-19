@@ -16,9 +16,16 @@ function AdminProduct() {
     countInStock: "",
     image: "",
   });
-
+  const formData = {
+    name: stateProduct.name,
+    price: stateProduct.price,
+    description: stateProduct.description,
+    type: stateProduct.type,
+    countInStock: stateProduct.countInStock,
+    image: stateProduct.image
+  }
   const [form] =Form.useForm();
-
+ 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -27,7 +34,7 @@ function AdminProduct() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(stateProduct),
+        body: JSON.stringify(formData),
       });
       const result = await response.json();
       if (!response.ok) {
@@ -40,6 +47,7 @@ function AdminProduct() {
       console.log(error);
     }
   };
+  
   const handleCancel = () => {
     setIsModalOpen(false);
     setStateProduct({
@@ -63,9 +71,9 @@ function AdminProduct() {
       [e.target.name]: e.target.value,
     });
   };
-  
+ 
   const [fileList, setFileList] = useState([]);
-
+ 
   const handleOnchangeImage = async ({ fileList }) => {
     const file = fileList[0];
     if (!file.url && !file.preview) {
@@ -77,6 +85,8 @@ function AdminProduct() {
     });
     setFileList([file]);
   };
+
+
  
   return (
     <div>

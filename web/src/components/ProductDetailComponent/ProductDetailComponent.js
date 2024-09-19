@@ -1,11 +1,28 @@
 import { Col, Image, InputNumber, Row } from "antd";
-import imageProduct from '../../assets/images/image1.webp';
 import "../ProductDetailComponent/style.scss";
 import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
 import ButtonComponent from "../ButtonComponent/ButtonComponent";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function ProductDetailComponent() {
+function ProductDetailComponent({idProduct}) {
+    const [products, setproducts] = useState([]);
+    //  const response = await fetch(`http://localhost:5000/admin/${filename}`); // ${filename}
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`http://localhost:5000/getid/${idProduct}`); // ${filename}
+          const data = await response.json();
+          // console.log(data)
+          setproducts(data); // Assuming data.image contains the base64 string
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      };
+  
+      fetchData();
+    }, [idProduct]);
+
+
     const [numProduct, setNumProduct] = useState(1);
     const onChange=(value) => {
         setNumProduct(Number(value))
@@ -21,17 +38,22 @@ function ProductDetailComponent() {
 
     const handleAddOrderProduct= () => {
     }
+    console.log(products[0]?.description)
     return ( 
         <Row style={{padding:'16px', background:'#fff', borderRadius: '4px'}}>
             <Col style={{borderRight: '1px solid #e5e5e5', paddingRight: '8px'}} span={10}>
-                <Image className="ImageLarge" src = {imageProduct} alt= "image product" preview = {false}/>
+                <Image className="ImageLarge" src = {products[0]?.image} alt= "image product" preview = {false}/>
             </Col>
             <Col style={{padding:'10px'}} span={14}>
                 <div className="Name_ProducDetail">
-                    Apple iPhone 15 Pro Max
+                    {products[0]?.name}
                 </div>
                 <div className="Wrap_Price_ProductDetail">
-                    <div className="Price_ProductDetail">20.000.000đ</div>
+                    <div className="Price_ProductDetail">{products[0]?.price.toLocaleString()}</div>
+                </div>
+                <div className="Wrap_Description_ProductDetail">
+                    <div className="Description_ProductDetail">Mô tả sản phẩm:</div>
+                    <div>{products[0]?.description}</div>
                 </div>
                 <div className="AddressProduct">
                     <span>Giao đến</span>
