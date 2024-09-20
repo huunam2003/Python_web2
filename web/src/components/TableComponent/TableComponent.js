@@ -13,7 +13,6 @@ function TableComponent(props) {
         const response = await fetch(`http://localhost:5000/filter`);
         const data = await response.json();
         setProducts(data);
-        console.log(data)
       } catch (error) {
         console.error('Error', error);
       }

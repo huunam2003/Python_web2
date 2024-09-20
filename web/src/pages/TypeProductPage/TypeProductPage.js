@@ -1,22 +1,22 @@
 import { Col, Row } from "antd";
 import CardComponent from "../../components/CardComponent/CardComponent";
-import NavbarComponent from "../../components/NavbarComponent/NavbarComponent";
 import "../TypeProductPage/style.scss";
 import { useEffect, useState } from "react";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import { useParams } from "react-router-dom";
+import NavbarComponent from "../../components/NavbarComponent/NavbarComponent";
 
 function TypeProductPage() {
-    const { type } = useParams();
+    const { type,column } = useParams();
 
   const [visibleCount, setVisibleCount] = useState(10);
- 
+  console.log(type,"-",column)
   const [products, setproducts] = useState([]);
   //  const response = await fetch(`http://localhost:5000/admin/${filename}`); // ${filename}
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/type/${type}`); // ${filename}
+        const response = await fetch(`http://localhost:5000/${column}/${type}`); // ${filename}
         const data = await response.json();
         // console.log(data)
         setproducts(data); // Assuming data.image contains the base64 string
@@ -26,7 +26,7 @@ function TypeProductPage() {
     };
 
     fetchData();
-  }, [type]);
+  }, [column,type]);
 
 
   const handleSeeMore = () => {

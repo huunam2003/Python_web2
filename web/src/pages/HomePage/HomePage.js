@@ -6,9 +6,9 @@ import slider2 from "../../assets/images/slider2.webp";
 import CardComponent from "../../components/CardComponent/CardComponent";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import { useEffect, useState } from "react";
-
 function HomePage() {
-  const arr = ["dell", "HP", "Lenovo", "Acer", "MSI"];
+
+  const arr = ["DELL", "LENOVO", "MSI"];
 
   const [visibleCount, setVisibleCount] = useState(6);
 
@@ -38,7 +38,7 @@ function HomePage() {
       <div className="HomePage">
         <div className="TypeProduct">
           {arr.map((item) => {
-            return <TypeProduct name={item} key={item} />;
+            return <TypeProduct name={item} column = 'type' key={item} />;
           })}
         </div>
       </div>

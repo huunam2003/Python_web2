@@ -8,7 +8,11 @@ import {
   ShoppingCartOutlined,
 }from '@ant-design/icons';
 import { useState } from "react";
+import { useCart } from "../CartContext/CartContext";
+
 function HeaderComponent() {
+  const { cartCount } = useCart();
+
   const navigate = useNavigate() 
   const handleNavigateHome = () => {
     navigate('/')
@@ -44,6 +48,7 @@ function HeaderComponent() {
             size = 'large'
             placeholder = 'Search' 
             textButton = 'Tìm kiếm'
+
           />
         </Col>
         <Col span={6} style={{display: 'flex', gap: '54px', alignItems: 'center'}}>
@@ -63,7 +68,7 @@ function HeaderComponent() {
           </div>
 
           <div>
-              <Badge count ={4} size="small">
+              <Badge count={cartCount} size="small">
                 <ShoppingCartOutlined onClick={handleNavigateCart} style={{fontSize: '30px', color: '#fff'}}/>
               </Badge>
               <span className="User_Text" onClick={handleNavigateCart}>Giỏ hàng</span>

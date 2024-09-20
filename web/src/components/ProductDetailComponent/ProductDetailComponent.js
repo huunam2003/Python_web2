@@ -3,8 +3,22 @@ import "../ProductDetailComponent/style.scss";
 import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
 import ButtonComponent from "../ButtonComponent/ButtonComponent";
 import { useEffect, useState } from "react";
-
+import { useCart } from "../CartContext/CartContext";
 function ProductDetailComponent({idProduct}) {
+
+    const { addToCart } = useCart(); // Sử dụng addToCart từ context
+
+    const handleAddOrderProduct = () => {
+        const product = {
+            id: idProduct,
+            name: products[0]?.name,
+            price: products[0]?.price,
+            quantity: numProduct,
+            image: products[0]?.image
+        };
+        addToCart(product); // Thêm sản phẩm vào giỏ hàng
+    };
+
     const [products, setproducts] = useState([]);
     //  const response = await fetch(`http://localhost:5000/admin/${filename}`); // ${filename}
     useEffect(() => {
@@ -36,9 +50,6 @@ function ProductDetailComponent({idProduct}) {
         }
     }
 
-    const handleAddOrderProduct= () => {
-    }
-    console.log(products[0]?.description)
     return ( 
         <Row style={{padding:'16px', background:'#fff', borderRadius: '4px'}}>
             <Col style={{borderRight: '1px solid #e5e5e5', paddingRight: '8px'}} span={10}>

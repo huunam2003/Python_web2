@@ -28,7 +28,7 @@ class Product(db.Model):
     type = db.Column(db.String(100), nullable=False)
     countinstock = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Double, nullable=False)
-    description = db.Column(db.String(100), nullable = False)
+    description = db.Column(db.String(1000), nullable = False)
     image = db.Column(db.LargeBinary)
     def to_dict(self):
             return {
@@ -94,10 +94,12 @@ def signin():
     existing_user = User.query.filter_by(email=email, password = password).first()
  
     if existing_user:
-        return jsonify({"message":"dang nhap thanh cong!", "email" : existing_user.email , 'status' : 1})
+        return jsonify({"message":"dang nhap thanh cong!",
+                        "email" : existing_user.email , 'status' : 1 ,
+                        "IDUser" : existing_user.id
+                        })
     else:
         return jsonify({"message": "Mat khau hoac email khong dung" ,'status' : 0}),404
- 
  
 @app.route('/admin/<filename>', methods = ['GET'])
 def getImage(filename):
@@ -163,6 +165,16 @@ def getType(type):
     if products:
         return jsonify([product.to_url() for product in products])
     return jsonify({"message" : "falied to get type "})
+
+@app.route('/name/<name>', methods = ['GET'])
+def getName(name):
+    # print("%${name}%")
+    products = Product.query.filter(Product.name.like(f"%{name}%")).all() 
+    print(len(products))
+    if products:
+        return jsonify([product.to_url() for product in products])
+    return jsonify({"message" : "falied to get name"})
+
 
 @app.route('/delete/<int:id>', methods = ['DELETE'])
 def delete(id):
