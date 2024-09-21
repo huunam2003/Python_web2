@@ -72,6 +72,17 @@ with app.app_context():
 #     return jsonify([product.to_dict() for product in products])
  
 # Route to submit form data
+
+def encode_image(img):
+    image_base64 = re.sub(r'^data:image/[a-zA-Z]+;base64,', '', img)
+    image_binary = base64.b64decode(image_base64)
+        # # Fix Base64 padding if necessary
+    # missing_padding = -len(image_base64) % 4
+    # if missing_padding:
+    #     image_base64 += '=' * (4 - missing_padding)
+   
+    return image_binary
+
 @app.route("/submit", methods=["POST"])
 def submit_form():
     data = request.get_json()
@@ -175,7 +186,30 @@ def getName(name):
         return jsonify([product.to_url() for product in products])
     return jsonify({"message" : "falied to get name"})
 
+@app.route('/update/<int:id>', methods=['PUT'])
+def update(id):
+    product = Product.query.filter_by(id=id).first()
 
+    if not product:
+        return jsonify({"message": "Product not found"}), 404
+    data = request.get_json()
+    try:
+        # Update the existing product fields
+        product.name = data['name']
+        product.price = float(data['price'])
+        product.description = data['description']
+        product.type = data['type']
+        product.countinstock = int(data['countInStock'])
+        product.image = encode_image(data['image'])  # Store Base64 image string as binary
+        # Commit the changes to the database
+        db.session.commit()
+        return jsonify({"message": f"Product {id} updated successfully!"}), 200
+ 
+    except Exception as e:
+        print(e)
+        db.session.rollback()  # Rollback the session if something goes wrong
+        return jsonify({"error": str(e)}), 500
+    
 @app.route('/delete/<int:id>', methods = ['DELETE'])
 def delete(id):
     product= Product.query.filter_by(id = id).first()

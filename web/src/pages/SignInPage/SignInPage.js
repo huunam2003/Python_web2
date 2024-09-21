@@ -1,7 +1,6 @@
 import { Image } from "antd";
 import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 import React, { useState } from "react";
-
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import InputForm from "../../components/InputForm/InputForm";
 import "../SignInPage/style.scss";
@@ -27,15 +26,13 @@ function SignInPage() {
       });
       const result = await response.json();
       if (!response.ok) {
-        throw new Error(result.message);  // If response is not OK, throw an error
+        throw new Error(result.message);  
       }
-      // Only set UserData and handle success if the response is OK
-      localStorage.setItem('email', result.email); // Store email in localStorage
+      localStorage.setItem('email', result.email); 
       status = result.status;
       alert(result.message);
       handleNavigateHome();
     } catch (error) {
-      // Handle error when the response is not OK
       alert(error.message);
       console.log(error);
     }

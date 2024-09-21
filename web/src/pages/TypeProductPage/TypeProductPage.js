@@ -33,7 +33,6 @@ function TypeProductPage() {
     setVisibleCount((prevCount) => prevCount + 5); // Tăng số sản phẩm hiển thị
   };
 
-  console.log(products);
   return (
     <div className="Container_TypeProduct">
       <div style={{ width: "1400px", margin: "0 auto" }}>

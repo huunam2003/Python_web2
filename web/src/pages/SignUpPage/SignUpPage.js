@@ -1,5 +1,4 @@
 import React, { useState} from 'react';
-
 import { Image } from "antd";
 import "../SignUpPage/style.scss";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
@@ -7,7 +6,6 @@ import InputForm from "../../components/InputForm/InputForm";
 import imageLogin from '../../assets/images/login.webp';
 import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-//import { configConsumerProps } from 'antd/lib/config-provider';
 
 function SignUpPage() {
     const [isShowPassword ,setIsShowPassword] = useState(false);
@@ -29,19 +27,15 @@ function SignUpPage() {
             });
             const result = await response.json();
             if (!response.ok) {
-                throw new Error(result.message);  // Throw an error to be caught in the catch block
+                throw new Error(result.message);
               }
-            
-            
             if (password === confirmPassword){
               alert("Dang ky thanh cong")
               handleNavigateSignIn()
             }
-
           else{
             alert("Mat khau khong khop")
           }
-
         } catch (error) {
           // neu trung email
           alert(error);
