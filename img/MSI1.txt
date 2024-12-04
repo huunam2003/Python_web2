@@ -1,0 +1,73 @@
+# 1 Laptop MSI GF63 Thin
+
+Thông tin chi ti?t:
+Màn hình	15.6" FHD (1920 x 1080) 144Hz, IPS-Level
+•	C?ng giao ti?p	1x Type-C (USB 3.2 Gen 1 / DP)
+
+•	3x Type-A USB 3.2 Gen 1
+
+•	1x HDMI™ (4K @ 30Hz)
+
+•	1x Mic-in, 1x Headphone-out
+
+•	1x RJ45
+
+•	Led-Keyboard	Red
+
+•	Audio	2x 2W Speaker
+
+#2Laptop Gaming MSI Bravo 15
+Laptop Gaming MSI Bravo 15 B7ED-010VN: Chi?n th?n trong th? gi?i ?o
+
+Là m?t chi?c laptop gaming t?m trung, MSI Gaming Bravo 15 B7ED không ch? d?p m?t mà còn ?n tu?ng v?i kh? nang hi?u su?t không gi?i h?n. Thi?t k? m?nh m?, h?m h? không ch? làm n?i b?t tính co d?ng mà còn tôn lên v? m?nh m? c?a nó trên m?i d?u tru?ng ?o. Vì th?, chi?c laptop này h?a h?n s? là ngu?i b?n d?ng hành dáng tin c?y, dua ngu?i dùng vào m?t tr?i nghi?m gaming ch?t lu?ng và không ng?ng khám phá nh?ng th? gi?i ?o d?y màu s?c.
+
+MSI Gaming Bravo 15 B7ED-010VN có thi?t k? m?nh m?, gaming
+
+#3Laptop MSI Thin 15 B12UCX-1419VN 
+- CPU: Intel Core i5-12450H
+
+- Màn hình: 15.6" IPS (1920 x 1080),144Hz
+
+- RAM: 1 x 8GB DDR4 3200MHz
+
+- Ð? h?a: RTX 2050 4GB GDDR6 / Intel UHD Graphics
+
+- Luu tr?: 512GB SSD M.2 NVMe /
+
+- H? di?u hành: Windows 11 Home
+
+- Pin: 3 cell 52 Wh Pin li?n
+
+- Kh?i lu?ng: 1.8kg
+
+- Chu?n Non-EVO
+
+#4Laptop MSI Katana 15
+Laptop MSI Katana 15 B13VFK 676VN (i7-13620H, 1TB SSD, DDR5 16GB, RTX 4060 GDDR6, 15.6"FHD 144Hz) Chính hãng BH 24 tháng
+
+
+#5Laptop MSI Modern 14
+- CPU: Intel Core i7-1355U
+
+- Màn hình: 14" IPS (1920 x 1080)
+
+- RAM: 16GB Onboard DDR4 3200MHz
+
+- Ð? h?a: Onboard Intel Iris Xe Graphics
+
+- Luu tr?: 512GB SSD M.2 NVMe /
+
+- H? di?u hành: Windows 11 Home
+
+- Pin: 3 cell 40 Wh Pin li?n
+
+#6 Laptop Gaming MSI Thin 15 
+=================================. 
+THÔNG S? K? THU?T
+B? vi x? lý (CPU) 
+Tên b? vi x? lý: Intel® Core™ i5-12450H Processor
+T?c d?: Up to 4.40GHz, 8 Cores, 12 Threads
+P-Cores: 4 Cores, 8 Threads, 2.00GHz Base, 4.40GHz Turbo
+E-Cores: 4 Cores, 4 Threads, 1.50GHz Base, 3.30GHz Turbo
+B? nh? d?m: L1: 704KB, L2: 7.0MB, L3: 12MB
+Chipset: Integrated SoC

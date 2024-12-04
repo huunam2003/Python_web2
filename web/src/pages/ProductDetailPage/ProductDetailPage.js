@@ -1,11 +1,12 @@
+import { useParams } from "react-router-dom";
 import ProductDetailComponent from "../../components/ProductDetailComponent/ProductDetailComponent";
 import "../ProductDetailPage/style.scss";
 
 function ProductDetailPage() {
+    const {id} = useParams()
     return ( 
         <div className="Wrap_ProductDetail">
-            <h5>Trang chủ</h5> 
-            <ProductDetailComponent/>
+            <ProductDetailComponent idProduct = {id}/>
         </div>
     );
 }

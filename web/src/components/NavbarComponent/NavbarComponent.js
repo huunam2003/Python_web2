@@ -2,20 +2,20 @@
 import "../NavbarComponent/style.scss";
 function NavbarComponent() {
     // const onChange = () => {};
-    const renderContent = (type, options) => {
-        switch (type) {
-        case 'text':
-            return options.map((option, index) => {
-                return <div key={index} className="TextValue">{option}</div>;
-            });
+    // const renderContent = (type, options) => {
+    //     switch (type) {
+    //     case 'text':
+    //         return options.map((option, index) => {
+    //             return <div key={index} className="TextValue">{option}</div>;
+    //         });
         // case 'checkbox':
         //     return(
         //     <Checkbox.Group style={{ width: "100%", display:'flex', flexDirection: 'column', gap:'12px'}} onChange={onChange}>
         //         {options.map((option) => {
         //             return (
-        //             <Checkbox 
-        //                 key={option.value} 
-        //                 style={{marginLeft:'0'}} 
+        //             <Checkbox
+        //                 key={option.value}
+        //                 style={{marginLeft:'0'}}
         //                 value={option.value}
         //             >
         //                 {option.label}
@@ -39,15 +39,14 @@ function NavbarComponent() {
         //                     <div key={index} className="Price_Navbar">{option}</div>
         //                 )
         //             })
-        default:
-            return {};
-        }
-    };
+        // default:
+        //     return {};
+        // }
+    // };
     return (
         <div >
             <div className="LabelText">Label</div>
             <div className="Content">
-                {renderContent("text", ["tu lanh", "TV", "may giat"])}
             </div>
             {/* <div className="Content">
                 {renderContent("checkbox", [
@@ -64,5 +63,5 @@ function NavbarComponent() {
         </div>
     );
 }
-
+ 
 export default NavbarComponent;

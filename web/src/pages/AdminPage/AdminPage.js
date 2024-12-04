@@ -1,29 +1,51 @@
-// import { Menu } from "antd";
-// import { useState } from "react";
-
+import { Menu } from "antd";
+import { useState } from "react";
+import { getItem } from "../../utils";
+import {
+    ProductOutlined,
+  }from '@ant-design/icons';
+import AdminProduct from "../../components/AdminProduct/AdminProduct";
 function AdminPage() {
-    // const rootSubmenuKeys = ['sub1', 'sub2', 'sub3']
-    // const [openKeys, setOpenKeys] = useState(['sub1']);
-    // const onOpenChange = (keys) => {
-    //   const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
-    //   if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
-    //     setOpenKeys(keys);
-    //   } 
-    //   else {
-    //     setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
-    //   }
-    // }
+    const items = [
+        getItem('Sản phẩm', 'product', <ProductOutlined/>) 
+      ];
+      
+    const [keySelected, setKeySelected] = useState('');
+
+    const renderPage = (key) => {
+        switch (key) {
+            case 'product':
+                return (
+                    <AdminProduct/>
+                )
+            default:
+                return <></>
+        }
+    }
+
+
+    const handleOnClick = ({key}) => {
+        setKeySelected(key); 
+    };
+
+    console.log(keySelected)
+
     return ( 
-        // <Menu
-        //     mode="inline"
-        //     openKeys={openKeys}
-        //     onOpenChange={onOpenChange}
-        //     style={{
-        //         width: 256,
-        //     }}
-        //     items={items}
-        // />
-        <div></div>
+        <div style={{display:'flex'}}>
+            <Menu
+                mode="inline"
+                style={{
+                    width: 256,
+                    boxShadow:'1px 1px 2px #ccc',
+                    height:'100vh',
+                }}
+                items={items}
+                onClick={handleOnClick}
+            />
+            <div style={{ flex: 1, padding:'10px'}}>
+                {renderPage(keySelected)}
+            </div>
+        </div>
     );
 }
 
